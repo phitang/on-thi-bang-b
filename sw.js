@@ -1,5 +1,5 @@
 // Lưu sẵn giao diện + câu hỏi để dùng offline. Video không qua đây (Safari cần tải video theo từng đoạn).
-const CACHE = 'onthi-b-v1';
+const CACHE = 'onthi-b-v2';
 const SHELL = ['./', 'index.html', 'data.js', 'images.js', 'manifest.webmanifest', 'icons/apple-touch-icon.png', 'icons/icon-192.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => {

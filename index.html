@@ -160,7 +160,7 @@ const video = $('#video');
 let afterVideo = null;
 function playVideo(kind, caption, onClose, btnText){
   const src = kind === 'ora' ? 'media/ora.mp4' : 'media/meme.mp4';
-  $('#vidCap').textContent = caption || (kind === 'ora' ? (EX && EX.wrong > EXAM.total - EXAM.pass ? 'Sai quá 3 câu, trượt rồi!' : 'Sai đến câu thứ 3 rồi! Sai thêm 1 câu là trượt!') : 'Sai rồi!');
+  $('#vidCap').textContent = caption || (kind === 'ora' ? (EX && EX.wrong === EXAM.total - EXAM.pass + 1 ? 'Sai câu thứ 4, bạn đã rớt!' : 'Sai thêm câu nữa, đã rớt rồi!') : 'Sai rồi!');
   $('#vidClose').textContent = btnText || 'Đóng, làm tiếp';
   afterVideo = onClose || null;
   video.src = src; video.currentTime = 0;
@@ -325,7 +325,7 @@ function renderExam(){
         playVideo('ora', 'Sai câu điểm liệt! Bạn đã rớt!', finishExam, 'Xem kết quả');
         setDock(''); return;
       }
-      playVideo(EX.wrong >= 3 ? 'ora' : 'meme');
+      playVideo(EX.wrong > EXAM.total - EXAM.pass ? 'ora' : 'meme');
     }
     const st = document.querySelector('.xstat'); if (st) st.outerHTML = `<div class="xstat"><div><b>${EX.picks.filter(x=>x!==undefined).length}/${EXAM.total}</b>Đã làm</div><div><b style="color:var(--bad)">${EX.wrong}</b>Câu sai</div><div><b>${Math.max(0,EXAM.total-EXAM.pass-EX.wrong)}</b>Được sai thêm</div></div>`;
     renderExamDock();
