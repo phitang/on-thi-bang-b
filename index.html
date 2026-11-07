@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14213d">
+<title>Ôn thi bằng B – 600 câu</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ôn thi B">
+<style>
+:root{
+  --bg:#f4f5f8; --card:#ffffff; --ink:#18202f; --muted:#667085; --line:#e3e6ec;
+  --brand:#14213d; --brand-ink:#ffffff; --accent:#fcb92b; --accent-ink:#241a00;
+  --ok:#16a34a; --ok-bg:#e7f6ec; --bad:#dc2626; --bad-bg:#fdecec; --warn:#b45309; --warn-bg:#fff4e0;
+  --sel:#2f5bd8; --sel-bg:#e9efff; --shadow:0 1px 2px rgba(16,24,40,.06),0 2px 8px rgba(16,24,40,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0f1420; --card:#171e2c; --ink:#e7eaf1; --muted:#98a2b3; --line:#283245;
+    --brand:#0b1220; --brand-ink:#e7eaf1; --accent:#fcb92b; --accent-ink:#241a00;
+    --ok:#4ade80; --ok-bg:#133222; --bad:#f87171; --bad-bg:#3a1717; --warn:#fbbf24; --warn-bg:#3a2a0e;
+    --sel:#7aa2ff; --sel-bg:#1d2a4d; --shadow:none;
+  }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:16px;line-height:1.45}
+button{font:inherit;color:inherit;cursor:pointer}
+.top{position:sticky;top:0;z-index:5;background:var(--brand);color:var(--brand-ink);padding:calc(10px + env(safe-area-inset-top)) 16px 10px;display:flex;align-items:center;gap:10px;min-height:56px}
+.top h1{font-size:17px;margin:0;font-weight:650;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.iconbtn{background:transparent;border:0;width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:inherit}
+.iconbtn:active{background:rgba(255,255,255,.12)}
+.wrap{max-width:720px;margin:0 auto;padding:16px 16px 120px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.hero{background:var(--brand);color:var(--brand-ink);border-radius:16px;padding:18px;position:relative;overflow:hidden}
+.hero .stripe{position:absolute;right:-30px;top:0;bottom:0;width:120px;background:repeating-linear-gradient(135deg,var(--accent) 0 14px,transparent 14px 28px);opacity:.9;clip-path:polygon(40% 0,100% 0,100% 100%,0 100%)}
+.hero h2{margin:0 0 4px;font-size:22px}
+.hero p{margin:0;opacity:.8;font-size:14px;max-width:70%}
+.bar{height:8px;background:rgba(255,255,255,.18);border-radius:99px;overflow:hidden;margin-top:14px;max-width:70%}
+.bar>i{display:block;height:100%;background:var(--accent);border-radius:99px}
+.stats{display:flex;gap:16px;margin-top:10px;font-size:13px;opacity:.9}
+.cta{display:flex;align-items:center;gap:14px;width:100%;text-align:left;border:0;background:var(--accent);color:var(--accent-ink);border-radius:14px;padding:16px;margin-top:14px;font-weight:700;font-size:17px}
+.cta small{display:block;font-weight:500;font-size:13px;opacity:.8}
+.cta .badge{width:44px;height:44px;border-radius:12px;background:rgba(0,0,0,.1);display:grid;place-items:center;flex:none}
+.sec{font-size:13px;font-weight:650;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:22px 4px 8px}
+.list{display:flex;flex-direction:column}
+.row{display:flex;align-items:center;gap:12px;padding:13px 14px;border:0;background:transparent;text-align:left;width:100%;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row:active{background:var(--bg)}
+.row .num{width:34px;height:34px;border-radius:9px;background:var(--bg);display:grid;place-items:center;font-weight:700;font-size:14px;flex:none}
+.row .t{flex:1;min-width:0}
+.row .t b{display:block;font-weight:600;font-size:15px}
+.row .t span{font-size:13px;color:var(--muted)}
+.row .mini{width:56px;height:5px;background:var(--line);border-radius:9px;overflow:hidden;flex:none}
+.row .mini i{display:block;height:100%;background:var(--ok)}
+.tag-l{background:var(--bad-bg)!important;color:var(--bad)}
+.qhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.pill{font-size:12px;font-weight:650;padding:3px 9px;border-radius:99px;background:var(--bg);border:1px solid var(--line);color:var(--muted)}
+.pill.l{background:var(--bad-bg);border-color:transparent;color:var(--bad)}
+.qtext{font-size:17px;font-weight:600;margin:0 0 12px}
+.figs{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.figs img{max-width:100%;max-height:300px;object-fit:contain;border-radius:10px;background:#fff;border:1px solid var(--line);align-self:center}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;padding:12px 13px;border-radius:12px;border:1.5px solid var(--line);background:var(--card)}
+.opt .k{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-size:13px;font-weight:700;flex:none;margin-top:1px}
+.opt.sel{border-color:var(--sel);background:var(--sel-bg)}.opt.sel .k{background:var(--sel);border-color:var(--sel);color:#fff}
+.opt.ok{border-color:var(--ok);background:var(--ok-bg)}.opt.ok .k{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.bad{border-color:var(--bad);background:var(--bad-bg)}.opt.bad .k{background:var(--bad);border-color:var(--bad);color:#fff}
+.opt[disabled]{cursor:default}
+.fb{margin-top:12px;padding:10px 12px;border-radius:10px;font-size:14px;font-weight:600}
+.fb.ok{background:var(--ok-bg);color:var(--ok)}.fb.bad{background:var(--bad-bg);color:var(--bad)}
+.dock{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));z-index:6}
+.dock .in{max-width:720px;margin:0 auto;display:flex;gap:10px;align-items:center}
+.btn{border:0;border-radius:12px;padding:12px 16px;font-weight:650;background:var(--bg);border:1px solid var(--line)}
+.btn.pri{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.btn.acc{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:disabled{opacity:.4}
+.grow{flex:1}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:6px}
+.cell{height:40px;border-radius:9px;border:1px solid var(--line);background:var(--card);font-size:13px;font-weight:650}
+.cell.cur{outline:2px solid var(--sel);outline-offset:1px}
+.cell.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}
+.cell.bad{background:var(--bad-bg);color:var(--bad);border-color:transparent}
+.cell.done{background:var(--sel-bg);color:var(--sel);border-color:transparent}
+.timer{font-variant-numeric:tabular-nums;font-weight:700;background:rgba(255,255,255,.14);padding:5px 10px;border-radius:9px}
+.timer.low{background:var(--bad);color:#fff}
+.xstat{display:flex;gap:8px;margin-bottom:12px}
+.xstat div{flex:1;text-align:center;padding:8px;border-radius:10px;background:var(--card);border:1px solid var(--line);font-size:12px;color:var(--muted)}
+.xstat b{display:block;font-size:18px;color:var(--ink)}
+.result{text-align:center;padding:24px 16px}
+.result .big{font-size:44px;font-weight:800;margin:6px 0}
+.result .verdict{display:inline-block;padding:6px 14px;border-radius:99px;font-weight:700}
+.verdict.pass{background:var(--ok-bg);color:var(--ok)}.verdict.fail{background:var(--bad-bg);color:var(--bad)}
+.note{font-size:13px;color:var(--muted)}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:50;display:none;flex-direction:column;align-items:center;justify-content:center;padding:16px}
+.overlay.on{display:flex}
+.overlay video{width:100%;max-width:720px;max-height:72vh;border-radius:12px;background:#000}
+.overlay .cap{color:#fff;font-weight:800;font-size:20px;margin:0 0 12px;text-align:center}
+.overlay .btn{margin-top:14px}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:40;display:none;align-items:flex-end;justify-content:center}
+.sheet.on{display:flex}
+.sheet .panel{background:var(--card);width:100%;max-width:720px;border-radius:18px 18px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom));max-height:80vh;overflow:auto}
+.sheet h3{margin:0 0 12px;font-size:16px}
+.empty{text-align:center;color:var(--muted);padding:40px 16px}
+.hist{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-top:1px solid var(--line);font-size:14px}
+.hist:first-child{border-top:0}
+</style>
+</head>
+<body>
+<header class="top">
+  <button class="iconbtn" id="back" aria-label="Quay lại" style="display:none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <h1 id="title">Ôn thi bằng lái ô tô hạng B</h1>
+  <span id="topRight"></span>
+</header>
+<main class="wrap" id="view"></main>
+<div class="dock" id="dock" style="display:none"><div class="in" id="dockIn"></div></div>
+
+<div class="overlay" id="vid">
+  <p class="cap" id="vidCap"></p>
+  <video id="video" playsinline webkit-playsinline preload="auto"></video>
+  <button class="btn acc" id="vidClose">Đóng, làm tiếp</button>
+</div>
+<div class="sheet" id="sheet"><div class="panel" id="sheetIn"></div></div>
+
+<script src="data.js"></script>
+<script src="images.js"></script>
+<script>
+(function(){
+'use strict';
+const QS = window.QS;
+const BYN = {}; QS.forEach(q => BYN[q.n] = q);
+const CH = [
+  ['Chương 1','Quy định chung và quy tắc giao thông'],
+  ['Chương 2','Văn hóa giao thông, đạo đức, PCCC và cứu hộ'],
+  ['Chương 3','Kỹ thuật lái xe'],
+  ['Chương 4','Cấu tạo và sửa chữa'],
+  ['Chương 5','Báo hiệu đường bộ'],
+  ['Chương 6','Sa hình và xử lý tình huống']
+];
+// Đề hạng B (Thông tư 12/2025/TT-BCA): 30 câu, 20 phút, đạt 27/30, 1 câu điểm liệt.
+const EXAM = { total:30, minutes:20, pass:27, plan:[[0,9],[1,1],[2,2],[3,1],[4,9],[5,7]] };
+const KEYS = 'ABCD';
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+// ---------- lưu tiến độ ----------
+const SKEY = 'onthi-b1-v1';
+let S = { ans:{}, hist:[] };            // ans[n] = lựa chọn gần nhất khi học
+try { const v = JSON.parse(localStorage.getItem(SKEY) || 'null'); if (v) S = Object.assign(S, v); } catch(e){}
+function save(){ try { localStorage.setItem(SKEY, JSON.stringify(S)); } catch(e){} }
+const isOk = n => S.ans[n] !== undefined && S.ans[n] === BYN[n].a;
+const isBad = n => S.ans[n] !== undefined && S.ans[n] !== BYN[n].a;
+
+// ---------- video ----------
+const video = $('#video');
+let afterVideo = null;
+function playVideo(kind, caption, onClose, btnText){
+  const src = kind === 'ora' ? 'media/ora.mp4' : 'media/meme.mp4';
+  $('#vidCap').textContent = caption || (kind === 'ora' ? (EX && EX.wrong > EXAM.total - EXAM.pass ? 'Sai quá 3 câu, trượt rồi!' : 'Sai đến câu thứ 3 rồi! Sai thêm 1 câu là trượt!') : 'Sai rồi!');
+  $('#vidClose').textContent = btnText || 'Đóng, làm tiếp';
+  afterVideo = onClose || null;
+  video.src = src; video.currentTime = 0;
+  $('#vid').classList.add('on');
+  const p = video.play(); if (p && p.catch) p.catch(()=>{ video.controls = true; });
+}
+function closeVideo(){
+  video.pause(); video.removeAttribute('src'); video.load(); video.controls = false; $('#vid').classList.remove('on');
+  const cb = afterVideo; afterVideo = null; if (cb) cb();
+}
+video.addEventListener('ended', closeVideo);
+$('#vidClose').onclick = closeVideo;
+
+// ---------- khung giao diện ----------
+function setTop(title, showBack, right){
+  $('#title').textContent = title;
+  $('#back').style.display = showBack ? '' : 'none';
+  $('#topRight').innerHTML = right || '';
+}
+function setDock(html){ const d = $('#dock'); if (html){ $('#dockIn').innerHTML = html; d.style.display=''; } else { d.style.display='none'; $('#dockIn').innerHTML=''; } }
+$('#back').onclick = () => { if (history.length > 1) history.back(); else go('#home'); };
+function go(h){ if (location.hash === h) route(); else location.hash = h; }
+function openSheet(html){ $('#sheetIn').innerHTML = html; $('#sheet').classList.add('on'); }
+function closeSheet(){ $('#sheet').classList.remove('on'); }
+$('#sheet').addEventListener('click', e => { if (e.target.id === 'sheet') closeSheet(); });
+
+function questionHTML(q, idx, total, extraPill){
+  const figs = q.i ? '<div class="figs">' + q.i.map(f => `<img src="${window.IMG[f]}" alt="Hình minh họa câu ${q.n}" loading="lazy">`).join('') + '</div>' : '';
+  return `<div class="qhead"><span class="pill">Câu ${idx+1}/${total}</span><span class="pill">Số ${q.n} · ${CH[q.c][0]}</span>${q.l ? '<span class="pill l">Điểm liệt</span>' : ''}${extraPill||''}</div>
+    <p class="qtext">${esc(q.q)}</p>${figs}
+    <div class="opts">${q.o.map((o,i)=>`<button class="opt" data-i="${i}"><span class="k">${KEYS[i]}</span><span>${esc(o)}</span></button>`).join('')}</div>
+    <div id="fbox"></div>`;
+}
+function markOpts(q, chosen, reveal){
+  document.querySelectorAll('.opt').forEach(b => {
+    const i = +b.dataset.i; b.className = 'opt';
+    if (reveal){
+      b.disabled = true;
+      if (i === q.a) b.classList.add('ok'); else if (i === chosen) b.classList.add('bad');
+    } else if (i === chosen) b.classList.add('sel');
+  });
+  if (reveal && chosen !== undefined){
+    $('#fbox').innerHTML = chosen === q.a ? '<div class="fb ok">Chính xác!</div>' : `<div class="fb bad">Sai. Đáp án đúng: ${KEYS[q.a]}</div>`;
+  }
+}
+
+// ---------- trang chủ ----------
+function home(){
+  setTop('Ôn thi bằng lái ô tô hạng B', false, ''); setDock('');
+  const done = Object.keys(S.ans).length, ok = QS.filter(q => isOk(q.n)).length;
+  const wrong = QS.filter(q => isBad(q.n)).length;
+  const dl = QS.filter(q => q.l);
+  const chRows = CH.map((c,i) => {
+    const qs = QS.filter(q => q.c === i), d = qs.filter(q => isOk(q.n)).length;
+    return `<button class="row" data-go="#learn/c${i}"><span class="num">${i+1}</span><span class="t"><b>${c[1]}</b><span>${qs.length} câu · đúng ${d}</span></span><span class="mini"><i style="width:${Math.round(d/qs.length*100)}%"></i></span></button>`;
+  }).join('');
+  const resume = EX && !EX.done ? `<button class="cta" style="background:var(--card);color:var(--ink);border:1.5px solid var(--accent)" data-go="#exam"><span class="badge">⏱</span><span>Tiếp tục bài thi đang làm<small>Còn ${fmt(EX.left)} · đã làm ${EX.picks.filter(x=>x!==undefined).length}/${EXAM.total}</small></span></button>` : '';
+  const last = S.hist[0];
+  $('#view').innerHTML = `
+    <section class="hero"><div class="stripe"></div>
+      <h2>600 câu lý thuyết</h2>
+      <p>Bộ câu hỏi sát hạch mới (áp dụng từ 01/6/2025)</p>
+      <div class="bar"><i style="width:${(ok/600*100).toFixed(1)}%"></i></div>
+      <div class="stats"><span>Đã làm ${done}/600</span><span>Đúng ${ok}</span><span>Sai ${wrong}</span></div>
+    </section>
+    ${resume}
+    <button class="cta" data-act="newExam"><span class="badge">📝</span><span>Thi thử hạng B<small>${EXAM.total} câu · ${EXAM.minutes} phút · đạt ${EXAM.pass}/${EXAM.total}, không sai câu điểm liệt</small></span></button>
+    <div class="sec">Học theo chương</div>
+    <div class="card list">${chRows}</div>
+    <div class="sec">Ôn trọng tâm</div>
+    <div class="card list">
+      <button class="row" data-go="#learn/dl"><span class="num tag-l">!</span><span class="t"><b>60 câu điểm liệt</b><span>Sai 1 câu là trượt · đúng ${dl.filter(q=>isOk(q.n)).length}/60</span></span></button>
+      <button class="row" data-go="#learn/wrong"><span class="num">✗</span><span class="t"><b>Câu đã làm sai</b><span>${wrong} câu cần ôn lại</span></span></button>
+      <button class="row" data-go="#learn/all"><span class="num">∑</span><span class="t"><b>Toàn bộ 600 câu</b><span>Học lần lượt từ câu 1</span></span></button>
+    </div>
+    <div class="sec">Lịch sử thi thử</div>
+    <div class="card list">${S.hist.length ? S.hist.slice(0,8).map(h => `<div class="hist"><span>${new Date(h.t).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}</span><span><b>${h.s}/${EXAM.total}</b> · <span class="verdict ${h.p?'pass':'fail'}" style="padding:2px 8px;font-size:12px">${h.p?'Đạt':'Trượt'}</span></span></div>`).join('') : '<div class="empty" style="padding:20px">Chưa có bài thi nào</div>'}</div>
+    ${S.hist.length || done ? '<p class="note" style="text-align:center;margin-top:24px"><button class="btn" data-act="reset">Xóa tiến độ học</button></p>' : ''}
+  `;
+}
+
+// ---------- học ----------
+let L = null; // {key, list, i}
+function learnList(key){
+  if (key === 'dl') return QS.filter(q => q.l);
+  if (key === 'wrong') return QS.filter(q => isBad(q.n));
+  if (key === 'all') return QS.slice();
+  return QS.filter(q => q.c === +key.slice(1));
+}
+function learnTitle(key){
+  if (key === 'dl') return '60 câu điểm liệt';
+  if (key === 'wrong') return 'Câu đã làm sai';
+  if (key === 'all') return '600 câu';
+  return CH[+key.slice(1)][0] + ' · ' + CH[+key.slice(1)][1];
+}
+function learn(key){
+  if (!L || L.key !== key){
+    const list = learnList(key);
+    let i = list.findIndex(q => S.ans[q.n] === undefined); if (i < 0) i = 0;
+    L = { key, list, i };
+  }
+  setTop(learnTitle(key), true, '');
+  if (!L.list.length){ setDock(''); $('#view').innerHTML = '<div class="empty">Không có câu nào ở mục này. Giỏi lắm!</div>'; return; }
+  renderLearn();
+}
+function renderLearn(){
+  const q = L.list[L.i];
+  $('#view').innerHTML = `<div class="card" style="padding:16px">${questionHTML(q, L.i, L.list.length)}</div>`;
+  markOpts(q, S.ans[q.n], S.ans[q.n] !== undefined);
+  document.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+    if (S.ans[q.n] !== undefined) return;
+    S.ans[q.n] = +b.dataset.i; save(); markOpts(q, S.ans[q.n], true);
+  });
+  setDock(`<button class="btn" data-act="lPrev" ${L.i===0?'disabled':''}>‹ Trước</button>
+    <button class="btn grow" data-act="lGrid">${L.i+1} / ${L.list.length}</button>
+    ${S.ans[q.n] !== undefined ? '<button class="btn" data-act="lRedo">Làm lại</button>' : ''}
+    <button class="btn pri" data-act="lNext" ${L.i===L.list.length-1?'disabled':''}>Sau ›</button>`);
+  window.scrollTo(0,0);
+}
+
+// ---------- thi thử ----------
+let EX = null, tick = null;
+function shuffle(a){ for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function buildExam(){
+  const dlPick = shuffle(QS.filter(q => q.l))[0];
+  let picked = [];
+  EXAM.plan.forEach(([c,k]) => { picked = picked.concat(shuffle(QS.filter(q => q.c === c && !q.l)).slice(0,k)); });
+  picked.push(dlPick);
+  picked.sort((a,b) => a.n - b.n);
+  return { qs: picked.map(q => q.n), picks: [], i: 0, wrong: 0, left: EXAM.minutes*60, done: false, started: Date.now() };
+}
+const fmt = s => String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
+function startTick(){
+  clearInterval(tick);
+  tick = setInterval(() => {
+    if (!EX || EX.done) return clearInterval(tick);
+    EX.left--; const t = $('#timer');
+    if (t){ t.textContent = fmt(EX.left); t.classList.toggle('low', EX.left <= 60); }
+    if (EX.left <= 0) finishExam();
+  }, 1000);
+}
+function exam(){
+  if (!EX || EX.done){ go('#home'); return; }
+  setTop('Thi thử hạng B', true, `<span class="timer" id="timer">${fmt(EX.left)}</span>`);
+  startTick(); renderExam();
+}
+function renderExam(){
+  const n = EX.qs[EX.i], q = BYN[n], chosen = EX.picks[EX.i];
+  const answered = EX.picks.filter(x => x !== undefined).length;
+  $('#view').innerHTML = `<div class="xstat"><div><b>${answered}/${EXAM.total}</b>Đã làm</div><div><b style="color:var(--bad)">${EX.wrong}</b>Câu sai</div><div><b>${Math.max(0,EXAM.total-EXAM.pass-EX.wrong)}</b>Được sai thêm</div></div>
+    <div class="card" style="padding:16px">${questionHTML(q, EX.i, EXAM.total)}</div>`;
+  markOpts(q, chosen, chosen !== undefined);
+  document.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+    if (EX.picks[EX.i] !== undefined || EX.done || EX.dlFail) return;
+    const c = +b.dataset.i; EX.picks[EX.i] = c;
+    markOpts(q, c, true);
+    if (c !== q.a){
+      EX.wrong++;
+      if (q.l){
+        // Sai câu điểm liệt: phát ORA và kết thúc bài thi ngay
+        EX.dlFail = true; clearInterval(tick);
+        playVideo('ora', 'Sai câu điểm liệt! Bạn đã rớt!', finishExam, 'Xem kết quả');
+        setDock(''); return;
+      }
+      playVideo(EX.wrong >= 3 ? 'ora' : 'meme');
+    }
+    const st = document.querySelector('.xstat'); if (st) st.outerHTML = `<div class="xstat"><div><b>${EX.picks.filter(x=>x!==undefined).length}/${EXAM.total}</b>Đã làm</div><div><b style="color:var(--bad)">${EX.wrong}</b>Câu sai</div><div><b>${Math.max(0,EXAM.total-EXAM.pass-EX.wrong)}</b>Được sai thêm</div></div>`;
+    renderExamDock();
+  });
+  renderExamDock(); window.scrollTo(0,0);
+}
+function renderExamDock(){
+  const last = EX.i === EXAM.total-1;
+  setDock(`<button class="btn" data-act="xPrev" ${EX.i===0?'disabled':''}>‹</button>
+    <button class="btn grow" data-act="xGrid">Câu ${EX.i+1}/${EXAM.total}</button>
+    <button class="btn acc" data-act="xSubmit">Nộp bài</button>
+    <button class="btn pri" data-act="xNext" ${last?'disabled':''}>›</button>`);
+}
+function finishExam(){
+  if (!EX || EX.done) return;
+  EX.done = true; clearInterval(tick);
+  const score = EX.qs.filter((n,i) => EX.picks[i] === BYN[n].a).length;
+  const dlFail = EX.qs.some((n,i) => BYN[n].l && EX.picks[i] !== BYN[n].a);
+  const pass = score >= EXAM.pass && !dlFail;
+  EX.result = { score, dlFail, pass };
+  EX.qs.forEach((n,i) => { if (EX.picks[i] !== undefined) S.ans[n] = EX.picks[i]; });
+  S.hist.unshift({ t: Date.now(), s: score, p: pass ? 1 : 0 }); S.hist = S.hist.slice(0,50); save();
+  closeSheet(); go('#result');
+}
+function result(){
+  if (!EX || !EX.done){ go('#home'); return; }
+  setTop('Kết quả thi thử', true, '');
+  const r = EX.result, unanswered = EX.picks.filter(x => x !== undefined).length;
+  const reason = r.pass ? 'Chúc mừng! Bạn đã vượt qua bài thi.' : (EX.dlFail ? 'Bài thi đã kết thúc vì bạn chọn sai câu điểm liệt. Bạn đã rớt.' : r.dlFail ? 'Bạn bỏ trống câu điểm liệt.' : `Cần đúng ít nhất ${EXAM.pass}/${EXAM.total} câu.`);
+  $('#view').innerHTML = `<div class="card result">
+      <div class="note">Số câu đúng</div><div class="big">${r.score}/${EXAM.total}</div>
+      <span class="verdict ${r.pass?'pass':'fail'}">${r.pass?'ĐẠT':'KHÔNG ĐẠT'}</span>
+      <p class="note" style="margin-top:12px">${reason}<br>Đã trả lời ${unanswered}/${EXAM.total} câu · thời gian ${fmt(EXAM.minutes*60-Math.max(0,EX.left))}</p>
+    </div>
+    <div class="sec">Xem lại bài làm</div>
+    <div class="card" style="padding:14px"><div class="grid">${EX.qs.map((n,i)=>{const c=EX.picks[i];const cls=c===undefined?'':(c===BYN[n].a?'ok':'bad');return `<button class="cell ${cls}" data-act="review" data-i="${i}">${i+1}${BYN[n].l?'!':''}</button>`;}).join('')}</div>
+    <p class="note" style="margin:10px 0 0">Dấu ! là câu điểm liệt.</p></div>`;
+  setDock(`<button class="btn grow" data-go="#home">Về trang chủ</button><button class="btn acc grow" data-act="newExam">Thi đề khác</button>`);
+}
+function review(i){
+  const n = EX.qs[i], q = BYN[n];
+  openSheet(`<h3>Câu ${i+1}</h3>${questionHTML(q, i, EXAM.total)}<div style="margin-top:14px;display:flex;gap:10px"><button class="btn grow" data-act="sheetClose">Đóng</button></div>`);
+  markOpts(q, EX.picks[i], true);
+  if (EX.picks[i] === undefined) $('#fbox').innerHTML = `<div class="fb bad">Bỏ trống. Đáp án đúng: ${KEYS[q.a]}</div>`;
+}
+
+// ---------- sự kiện chung ----------
+document.addEventListener('click', e => {
+  const g = e.target.closest('[data-go]'); if (g){ go(g.dataset.go); return; }
+  const a = e.target.closest('[data-act]'); if (!a) return;
+  const act = a.dataset.act;
+  if (act === 'newExam'){
+    if (EX && !EX.done){
+      openSheet(`<h3>Bỏ bài thi đang làm?</h3><p class="note">Bài đang làm sẽ bị hủy và tạo đề mới.</p><div style="display:flex;gap:10px;margin-top:14px"><button class="btn grow" data-act="sheetClose">Không</button><button class="btn acc grow" data-act="forceNew">Tạo đề mới</button></div>`);
+      return;
+    }
+    EX = buildExam(); go('#exam');
+  }
+  else if (act === 'forceNew'){ closeSheet(); EX = buildExam(); go('#exam'); }
+  else if (act === 'sheetClose') closeSheet();
+  else if (act === 'reset'){
+    openSheet(`<h3>Xóa toàn bộ tiến độ?</h3><p class="note">Kết quả học và lịch sử thi sẽ bị xóa.</p><div style="display:flex;gap:10px;margin-top:14px"><button class="btn grow" data-act="sheetClose">Hủy</button><button class="btn acc grow" data-act="resetYes">Xóa</button></div>`);
+  }
+  else if (act === 'resetYes'){ S = { ans:{}, hist:[] }; save(); L = null; closeSheet(); route(); }
+  else if (act === 'lPrev'){ if (L.i>0){ L.i--; renderLearn(); } }
+  else if (act === 'lNext'){ if (L.i<L.list.length-1){ L.i++; renderLearn(); } }
+  else if (act === 'lRedo'){ delete S.ans[L.list[L.i].n]; save(); renderLearn(); }
+  else if (act === 'lGrid'){
+    openSheet(`<h3>Chọn câu</h3><div class="grid">${L.list.map((q,i)=>`<button class="cell ${isOk(q.n)?'ok':isBad(q.n)?'bad':''} ${i===L.i?'cur':''}" data-act="lJump" data-i="${i}">${q.n}</button>`).join('')}</div>`);
+  }
+  else if (act === 'lJump'){ L.i = +a.dataset.i; closeSheet(); renderLearn(); }
+  else if (act === 'xPrev'){ if (EX.i>0){ EX.i--; renderExam(); } }
+  else if (act === 'xNext'){ if (EX.i<EXAM.total-1){ EX.i++; renderExam(); } }
+  else if (act === 'xGrid'){
+    openSheet(`<h3>Danh sách câu</h3><div class="grid">${EX.qs.map((n,i)=>{const c=EX.picks[i];const cls=c===undefined?'':(c===BYN[n].a?'ok':'bad');return `<button class="cell ${cls} ${i===EX.i?'cur':''}" data-act="xJump" data-i="${i}">${i+1}</button>`;}).join('')}</div>`);
+  }
+  else if (act === 'xJump'){ EX.i = +a.dataset.i; closeSheet(); renderExam(); }
+  else if (act === 'xSubmit'){
+    const left = EXAM.total - EX.picks.filter(x=>x!==undefined).length;
+    openSheet(`<h3>Nộp bài?</h3><p class="note">${left ? `Bạn còn ${left} câu chưa làm (tính là sai).` : 'Bạn đã làm hết các câu.'}</p><div style="display:flex;gap:10px;margin-top:14px"><button class="btn grow" data-act="sheetClose">Làm tiếp</button><button class="btn acc grow" data-act="xSubmitYes">Nộp bài</button></div>`);
+  }
+  else if (act === 'xSubmitYes') finishExam();
+  else if (act === 'review') review(+a.dataset.i);
+});
+
+// ---------- điều hướng ----------
+function route(){
+  closeSheet();
+  if ($('#vid').classList.contains('on')) closeVideo();
+  const h = location.hash || '#home';
+  if (h.startsWith('#learn/')) learn(h.slice(7));
+  else if (h === '#exam') exam();
+  else if (h === '#result') result();
+  else { L = null; home(); }
+}
+window.addEventListener('hashchange', route);
+// Nút Back của Android gọi hàm này
+window.appBack = function(){
+  if ($('#vid').classList.contains('on')){ closeVideo(); return true; }
+  if ($('#sheet').classList.contains('on')){ closeSheet(); return true; }
+  const h = location.hash || '#home';
+  if (h === '#home' || h === '') return false;
+  history.back(); return true;
+};
+route();
+// Cho phép dùng offline khi mở bằng trình duyệt (GitHub Pages / iPhone)
+if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(()=>{});
+})();
+</script>
+</body>
+</html>
